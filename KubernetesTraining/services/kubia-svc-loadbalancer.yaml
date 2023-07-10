@@ -1,0 +1,17 @@
+# The LoadBalancer type for services is more appropriate
+# than the NodePort as it will distrbute requests evenly across
+# nodes rather than over utilizing one node
+# if Kubernetes is running in an environment that doesn't support
+# LoadBalancer services, the load balancer will not be provisioned, but the
+# the service will still behave like a NodePort service
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: myapp
+  ports:
+    - port: 80
+      targetPort: 8080

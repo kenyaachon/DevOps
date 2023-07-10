@@ -1,0 +1,8 @@
+# a service without a pod selector
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-service
+spec:
+  ports:
+    - port: 80

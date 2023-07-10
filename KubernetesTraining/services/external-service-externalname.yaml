@@ -1,0 +1,17 @@
+# to create a service that services as an alias for an external
+# service, you can Create a Service resource with type field set
+# to set ExternalName
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-service-v2
+spec:
+  type: ExternalName
+  externalName: someapi.somecompany.com
+  ports:
+    - port: 80
+#ExternalName services are implemented solely at the DNS level
+# a simple CNAME DNS record is created for the service
+#After the service is created, pods can connect to the external service
+# through the external.service.default.svc.cluster.local domain name
+# instead of using the service's actual FQDN
