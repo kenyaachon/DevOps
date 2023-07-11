@@ -1,0 +1,31 @@
+# DNS need to point both the foo.example.com and the
+# the bar.example.com domain names to the Ingress conrollers IP address
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubia-multiple-services
+  labels:
+    name: kubia-multiple-services
+spec:
+  rules:
+    - host: foo.example.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: foo
+                port:
+                  number: 80
+    - host: bar.example.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: bar
+                port:
+                  number: 80
